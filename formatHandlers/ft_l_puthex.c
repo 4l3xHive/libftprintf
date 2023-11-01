@@ -23,7 +23,7 @@ int  ft_writehex(char *hexbuff, int start)
 }
 
 
-int	ft_l_puthex(int	dec, char c)
+int	ft_l_puthex(unsigned int dec, char c)
 {
 	char	hexbuff[100];
 	int		temp;

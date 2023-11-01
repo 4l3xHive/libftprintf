@@ -1,7 +1,7 @@
 CFLAGS = -Wall -Wextra -Werror
 NAME = libftprintf.a
 FORMATSRCS = $(wildcard formatHandlers/*.c)
-SRCS = $(wildcard srcs/*.c)
+SRCS = ft_printf.c
 FORMATOBJS = $(FORMATSRCS:.c=.o)
 OBJS = $(SRCS:.c=.o)
 

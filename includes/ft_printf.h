@@ -21,7 +21,9 @@ int	ft_printf(const char *s, ...);
 int     ft_l_putstr(char *s);
 int     ft_l_putchar(int c);
 void    ft_l_putnbr(int	nbr, int *total_lenght);
-int     ft_l_puthex(int dec, char c);
+int     ft_l_puthex(unsigned int dec, char c);
 int     ft_l_putpointer(size_t ptr);
 int     ft_writehex(char *hexbuff, int start);
+void    ft_l_put_uint(unsigned int u, int *total_length)
+
 #endif
