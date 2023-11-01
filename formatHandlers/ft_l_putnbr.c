@@ -12,28 +12,31 @@
 
 #include "ft_printf.h"
 
-int	ft_l_putnbr(int nbr)
+void	ft_l_putnbr(int nbr, int *total_lenght)
 {
 	char	c;
-	int		size;
 
-	size = 0;
+    if (nbr == -2147483648)
+	{
+		write(1, "-2147483648", 11);
+		*total_lenght += 11;
+        return;
+	}
     if (nbr < 0)
     {
         write(1, "-", 1);
-        ft_l_putnbr(-nbr);
-		size++;
+        ft_l_putnbr(-nbr, total_lenght);
+        *total_lenght += 1;
     }
     else if (nbr > 9)
     {
-		size++;
-        ft_l_putnbr(nbr / 10);
-        ft_l_putnbr(nbr % 10);
+        ft_l_putnbr(nbr / 10, total_lenght);
+        ft_l_putnbr(nbr % 10, total_lenght);
     }
     else
     {
         c = nbr + '0';
 		write(1, &c, 1);
+        *total_lenght += 1;
     }
-	return (size);
 }

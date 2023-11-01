@@ -12,6 +12,17 @@
 
 #include "ft_printf.h"
 
+int  ft_writehex(char *hexbuff, int start)
+{
+    int len;
+
+    len = 0;
+    while (start >= 0)
+        len += ft_l_putchar(hexbuff[start--]);
+    return (len);
+}
+
+
 int	ft_l_puthex(int	dec, char c)
 {
 	char	hexbuff[100];
@@ -26,11 +37,16 @@ int	ft_l_puthex(int	dec, char c)
         if (temp < 10) 
             temp = temp + '0'; 
         else
-            temp = temp + 55; 
+        {
+            if (c == 'x')
+                temp = temp + 87;
+            else if (c == 'X')
+                temp = temp + 55;
+        }
+        
         hexbuff[i++] = temp; 
         dec /= 16; 
     }
 	hexbuff[i] = '\0';
-	return (put(hexbuff, i - 1));
- for (j = i - 1; j > 0; j--) 
-        printf("%c", hexa_Number[j]); }
+    return (ft_writehex(hexbuff, i - 1));
+}

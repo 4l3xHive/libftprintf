@@ -1,25 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.h                                        :+:      :+:    :+:   */
+/*   ft_l_putpointer.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: apyykone <apyykone@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/01 15:46:25 by apyykone          #+#    #+#             */
-/*   Updated: 2023/11/01 16:53:40 by apyykone         ###   ########.fr       */
+/*   Created: 2023/11/01 23:18:32 by apyykone          #+#    #+#             */
+/*   Updated: 2023/11/01 23:18:48 by apyykone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_PRINTF_H
-#define FT_PRINTF_H
+#include "ft_printf.h"
 
-#include <stdarg.h>
-#include <unistd.h>
+int     ft_l_putpointer(size_t ptr)
+{
+	char	string[25];
+	int		i;
+	char	*base_character;
 
-int	ft_printf(const char *s, ...);
-
-int	ft_l_putstr(char *s);
-int	ft_l_putchar(char c);
-int	ft_l_putnbr(int nbr);
-
-#endif
+	base_character = "0123456789abcdef";
+	i = 0;
+	write(1, "0x", 2);
+	if (ptr == 0)
+		return (ft_l_putchar('0'));
+	while (ptr != 0)
+	{
+		string[i] = base_character[ptr % 16];
+		ptr /= 16;
+		i++;
+	}
+    return (ft_writehex(string, i) + 2);
+}
