@@ -1,13 +1,11 @@
 CFLAGS = -Wall -Wextra -Werror
 NAME = libftprintf.a
-FORMATSRCS = $(wildcard formatHandlers/*.c)
-SRCS = ft_printf.c
-FORMATOBJS = $(FORMATSRCS:.c=.o)
+SRCS = $(wildcard srcs/*.c srcs/formatHandlers/*.c)
 OBJS = $(SRCS:.c=.o)
 
 all: $(NAME)
 
-$(NAME): $(OBJS) $(FORMATOBJS)
+$(NAME): $(OBJS)
 	ar rcs $@ $^
 	ranlib $@
 
@@ -19,7 +17,7 @@ bonus: $(BONUS_OBJ)
 	ranlib $(NAME)
 
 clean:
-	rm -f $(FORMATOBJS) $(OBJS) $(BONUS_OBJ)
+	rm -f $(OBJS) $(BONUS_OBJ)
 
 fclean: clean
 	rm -f $(NAME)
