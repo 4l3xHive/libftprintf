@@ -1,10 +1,10 @@
 CFLAGS = -Wall -Wextra -Werror
 NAME = libftprintf.a
-SRCS = $(wildcard srcs/*.c srcs/formatHandlers/*.c)
+SRCS = $(wildcard mandatory/*.c)
 OBJS = $(SRCS:.c=.o)
 BONUS_LINKED_FLAG = .bonuslinked
-BONUS_SRCS = $(wildcard bsrcs/*.c)
-BONUS_OBJS = $(wildcard bsrcs/*.c)
+BONUS_SRCS = $(wildcard bonus/*.c)
+BONUS_OBJS = $(wildcard bonus/*.c)
 
 all: $(NAME)
 
