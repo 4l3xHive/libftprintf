@@ -2,9 +2,9 @@ CFLAGS = -Wall -Wextra -Werror
 NAME = libftprintf.a
 SRCS = $(wildcard mandatory/*.c)
 OBJS = $(SRCS:.c=.o)
-BONUS_LINKED_FLAG = .bonuslinked
 BONUS_SRCS = $(wildcard bonus/*.c)
-BONUS_OBJS = $(wildcard bonus/*.c)
+BONUS_OBJS = $(BONUS_SRCS:.c=.o)
+BONUS_LINKED_FLAG = .bonuslinked
 
 all: $(NAME)
 
@@ -13,13 +13,13 @@ $(NAME): $(OBJS)
 	ranlib $@
 
 %.o: %.c
-	gcc $(CFLAGS) -c $< -o $@ -Iincludes
+	gcc $(CFLAGS) -c $< -o $@ -Imandatory 
 
-bonus: $(BONUS_OBJ)
+bonus: $(BONUS_OBJS)
 	@if [ -f $(BONUS_LINKED_FLAG) ]; then \
 		echo "make: Nothing to be done for bonus'."; \
 	else \
-	    ar rus $(NAME) $^; \
+	    ar rcs $(NAME) $^; \
 	    ranlib $(NAME); \
 	    touch $(BONUS_LINKED_FLAG); \
 	fi
