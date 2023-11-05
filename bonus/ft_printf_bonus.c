@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_b_printf.c                                      :+:      :+:    :+:   */
+/*   ft_printf_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: apyykone <apyykone@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/05 11:58:13 by apyykone          #+#    #+#             */
-/*   Updated: 2023/11/05 20:19:03 by apyykone         ###   ########.fr       */
+/*   Updated: 2023/11/06 01:27:29 by apyykone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,6 @@ static void handle_flags_and_width(const char **s, int *flags, int *width, int *
 				(*s)++;
 				checkWidth(&s, &precision);
 			}
-		//	printf("width here %d\n", *width);
 		}
 		else if (**s == '0')
 			*flags |= FLAG_ZERO;
@@ -57,7 +56,6 @@ static void handle_flags_and_width(const char **s, int *flags, int *width, int *
 		}
     }
 	checkWidth(&s, &width);
-	//printf("check --> %d", *width);
 }
 
 
@@ -101,6 +99,7 @@ int ft_printf(const char *s, ...)
 			s++;
 			flags = 0;
 			width = 0;
+		    precision = 0;
 		}
 		else
 			total_length += ft_b_putchar(*s++, 0, 0);

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_l_putpointer.c                                  :+:      :+:    :+:   */
+/*   ft_putpointer_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: apyykone <apyykone@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/01 23:18:32 by apyykone          #+#    #+#             */
-/*   Updated: 2023/11/04 17:43:05 by apyykone         ###   ########.fr       */
+/*   Updated: 2023/11/06 00:29:37 by apyykone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int     ft_b_putpointer(size_t ptr)
 {
-	char	string[100];
+	char	string[1000];
 	int		i;
 	char	*base_character;
 
@@ -24,7 +24,7 @@ int     ft_b_putpointer(size_t ptr)
 	if (ptr == 0)
 	{
 		#ifdef __linux__
-			return (ft_b_putstr("(nil)"));
+			return (ft_b_putstr("(nil)", 0, 0, 0));
 		#endif
 		ft_b_putchar('0', 0, 0);
 	}
