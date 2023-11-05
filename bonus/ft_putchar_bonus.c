@@ -6,11 +6,12 @@
 /*   By: apyykone <apyykone@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/01 16:44:15 by apyykone          #+#    #+#             */
-/*   Updated: 2023/11/03 18:06:25 by apyykone         ###   ########.fr       */
+/*   Updated: 2023/11/05 18:43:10 by apyykone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_b_printf.h"
+#include <stdio.h>
 
 int	ft_b_putchar(int c, int flags, int width)
 {
