@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_m_printf.h"
+#include "ft_printf.h"
 
 void	ft_m_put_uint(unsigned int u, int *total_length)
 {

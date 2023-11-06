@@ -6,8 +6,7 @@
 
 
 
-
+## Use this command to replace the include paths of the tester files
 ```bash
 find . -type f -name "*.c" -exec sed -i 's/#include "ft_m_printf.h"/#include "ft_printf.h"/g' {} \;
 ```
-+ Use Above command to replace tester include paths

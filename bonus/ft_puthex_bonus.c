@@ -20,7 +20,7 @@ int ft_b_writehex(char *hexbuff, int start)
 
     len = 0;
     while (start >= 0)
-        len += ft_b_putchar(hexbuff[start--],0 ,0);
+        len += ft_b_putchar(hexbuff[start--],0 );
     return (len);
 }
 

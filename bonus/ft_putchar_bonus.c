@@ -13,14 +13,14 @@
 #include "ft_b_printf.h"
 #include <stdio.h>
 
-int	ft_b_putchar(int c, int flags, int width)
+int	ft_b_putchar(int c, int width)
 {
 	int		space;
 	int		total_len;
 
 	space = ' ';
 	total_len = 0;
-	if (flags & FLAG_MINUS)
+	if (g_flags & FLAG_MINUS)
 	{
 		total_len += write(1, &c, 1);
 		while (--width > 0)

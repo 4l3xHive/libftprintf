@@ -9,27 +9,34 @@ BONUS_LINKED_FLAG = .bonuslinked
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	ar rcs $@ $^
-	ranlib $@
+	@rm -f $(NAME) $(BONUS_OBJS) $(BONUS_LINKED_FLAG)
+	@ar rcs $@ $^
+	@ranlib $@
+	@echo "\033[0;32m::MANDATORY::\033[0m"
+	@ar -t  $@
 
 %.o: %.c
-	gcc $(CFLAGS) -c $< -o $@ -Imandatory 
+	@gcc $(CFLAGS) -c $< -o $@ -Imandatory 
 
 bonus: $(BONUS_OBJS)
 	@if [ -f $(BONUS_LINKED_FLAG) ]; then \
 		echo "make: Nothing to be done for bonus'."; \
 	else \
+		rm -f $(NAME) $(OBJS); \
 	    ar rcs $(NAME) $^; \
 	    ranlib $(NAME); \
 	    touch $(BONUS_LINKED_FLAG); \
+		echo "\033[0;31m:::::BONUS:::::\033[0m"; \
+		ar -t $(NAME); \
 	fi
 
 clean:
-	rm -f $(OBJS) $(BONUS_OBJS) $(BONUS_LINKED_FLAG)
+	@rm -f $(OBJS) $(BONUS_OBJS) $(BONUS_LINKED_FLAG)
 
 fclean: clean
-	rm -f $(NAME)
+	@rm -f $(NAME)
 
 re: fclean $(NAME)
 
 .PHONY: bonus all clean fclean re
+

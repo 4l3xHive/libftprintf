@@ -16,7 +16,7 @@ void	ft_b_put_uint(unsigned int u, int *total_length)
 {
 	if (u >= 10)
 		ft_b_put_uint(u / 10, total_length);
-	*total_length += ft_b_putchar(u % 10 + '0', 0, 0);
+	*total_length += ft_b_putchar(u % 10 + '0', 0);
 
 }
 

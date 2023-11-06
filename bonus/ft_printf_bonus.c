@@ -12,6 +12,7 @@
 
 #include "ft_b_printf.h"
 #include <stdio.h>
+int		g_flags;
 
 static int	ft_isdigit(int c)
 {
@@ -29,28 +30,28 @@ static void	checkWidth(const char ***s, int **width)
 	}
 
 }
-static void handle_flags_and_width(const char **s, int *flags, int *width, int *precision)
+static void check_flags_and_width(const char **s, int *width, int *precision)
 {
 	while (**s == '-' || **s == '0' || **s == '.')
 	{
         if (**s == '-')
         {
-			*flags |= FLAG_MINUS;
+			g_flags |= FLAG_MINUS;
 			(*s)++;
 			if (ft_isdigit(**s))
 				checkWidth(&s, &width);
 			if (**s == '.')
 			{
-				*flags |= FLAG_DOT;
+				g_flags |= FLAG_DOT;
 				(*s)++;
 				checkWidth(&s, &precision);
 			}
 		}
 		else if (**s == '0')
-			*flags |= FLAG_ZERO;
+			g_flags |= FLAG_ZERO;
         else if (**s == '.')
 		{
-        	*flags |= FLAG_DOT;
+        	g_flags |= FLAG_DOT;
 			(*s)++;
 			checkWidth(&s, &precision);
 		}
@@ -63,13 +64,12 @@ int ft_printf(const char *s, ...)
 {
 	va_list argptr;
 	int		total_length;
-	int		flags;
     int		width;
 	int		precision;
 
 	precision = 0;
 	width = 0;
-	flags = 0;
+	g_flags = 0;
 	va_start(argptr, s);
 	total_length = 0;
 
@@ -78,18 +78,18 @@ int ft_printf(const char *s, ...)
 		if (*s == '%')
 		{
 			s++;
-			handle_flags_and_width(&s, &flags, &width, &precision);
+			check_flags_and_width(&s, &width, &precision);
 		//	printf("width --> %d, precision --> %d\n", width, precision);
 			if (*s == 'd' || *s == 'i')	
-				ft_b_putnbr(va_arg(argptr, int), &total_length);
+				ft_b_putnbr(va_arg(argptr, int), &total_length, precision);
 			else if (*s == 's')
-				total_length += ft_b_putstr(va_arg(argptr, char *), flags, width, precision);
+				total_length += ft_b_putstr(va_arg(argptr, char *), width, precision);
 			else if (*s == 'c')
-				total_length += ft_b_putchar(va_arg(argptr, int), flags, width);
+				total_length += ft_b_putchar(va_arg(argptr, int), width);
 			else if (*s == 'x' || *s == 'X')
 				total_length += ft_b_puthex(va_arg(argptr, unsigned int), *s);
 			else if (*s == '%')
-				total_length += ft_b_putchar('%', 0, 0);
+				total_length += ft_b_putchar('%', 0);
 			else if (*s == 'p')
 				total_length += ft_b_putpointer(va_arg(argptr, size_t));
 			else if (*s == 'u')
@@ -97,12 +97,12 @@ int ft_printf(const char *s, ...)
 			
 			//printf("len --> %d\n", total_length);
 			s++;
-			flags = 0;
+			g_flags = 0;
 			width = 0;
 		    precision = 0;
 		}
 		else
-			total_length += ft_b_putchar(*s++, 0, 0);
+			total_length += ft_b_putchar(*s++, 0);
 	}
 	
 	va_end(argptr);

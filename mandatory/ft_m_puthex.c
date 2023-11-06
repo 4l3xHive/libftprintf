@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_m_printf.h"
+#include "ft_printf.h"
 
 /*** Writes buffer backwards algorithm adds hexdigits
  *		in backward order to the buffer				  */

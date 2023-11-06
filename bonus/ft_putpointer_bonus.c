@@ -24,9 +24,9 @@ int     ft_b_putpointer(size_t ptr)
 	if (ptr == 0)
 	{
 		#ifdef __linux__
-			return (ft_b_putstr("(nil)", 0, 0, 0));
+			return (ft_b_putstr("(nil)", 0, 0));
 		#endif
-		ft_b_putchar('0', 0, 0);
+		ft_b_putchar('0', 0);
 	}
 
 	while (ptr != 0)

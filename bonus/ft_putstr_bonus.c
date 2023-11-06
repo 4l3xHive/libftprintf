@@ -13,7 +13,7 @@
 #include "ft_b_printf.h"
 #include <stdio.h>
 /* IF THE WIDTH IS BIGGER THAN THE BUFFER RETURNS WITH ELSE THE LEN OF THE BUFFER. */
-static int ft_putsMinus(char *s, int width, int precision, int flags) {
+static int ft_putsMinus(char *s, int width, int precision) {
     int total_len;
     int orgwidth;
 
@@ -21,10 +21,10 @@ static int ft_putsMinus(char *s, int width, int precision, int flags) {
 	orgwidth = width;
     if (s == NULL)
 		s = "(null)";
-    if (FLAG_DOT & flags)
+    if (FLAG_DOT & g_flags)
     {
         while (precision-- && *s)
-	{
+	    {
             total_len += write(1, s++, 1);
             width--;
         }
@@ -44,7 +44,7 @@ static int ft_putsMinus(char *s, int width, int precision, int flags) {
     return (orgwidth);
 }
 
-static int	ft_putsNormal(char *s, int width, int precision, int flags)
+static int	ft_putsNormal(char *s, int width, int precision)
 {    
 	int total_len;
     int orgwidth;
@@ -55,7 +55,7 @@ static int	ft_putsNormal(char *s, int width, int precision, int flags)
         s = "(null)";
     while (width-- > 0)
         total_len += write(1, " ", 1);
-    if (FLAG_DOT & flags)
+    if (FLAG_DOT & g_flags)
 	{
         while (precision-- && *s)
             total_len += write(1, s++, 1);
@@ -71,9 +71,9 @@ static int	ft_putsNormal(char *s, int width, int precision, int flags)
     return (orgwidth);
 }
 
-int	ft_b_putstr(char *s, int flags, int width, int precision)
+int	ft_b_putstr(char *s, int width, int precision)
 {
-	if (flags & FLAG_MINUS)
-		return (ft_putsMinus(s, width, precision, flags));
-	return (ft_putsNormal(s, width, precision, flags));
+	if (g_flags & FLAG_MINUS)
+		return (ft_putsMinus(s, width, precision));
+	return (ft_putsNormal(s, width, precision));
 }
