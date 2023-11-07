@@ -14,7 +14,7 @@
 # define FT_B_PRINTF_H
 # define INT_MAX 2147483647
 # define INT_MIN -2147483648
-
+# include "libft.h"
 # include <stdarg.h>
 # include <unistd.h>
 # include <stdlib.h>
@@ -29,7 +29,7 @@ enum e_flags
 int     ft_printf(const char *s, ...);
 int	    ft_b_putstr(char *s, int width, int precision);
 int	    ft_b_putchar(int c, int width);
-void	ft_b_putnbr(int nbr, int *total_lenght, int precision, int width);
+int     ft_b_putnbr(int nbr, int *total_lenght, int precision, int width);
 int     ft_b_puthex(unsigned int dec, char c);
 int     ft_b_putpointer(size_t ptr);
 int     ft_b_writehex(char *hexbuff, int start);

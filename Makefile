@@ -16,7 +16,7 @@ $(NAME): $(OBJS)
 	@ar -t  $@
 
 %.o: %.c
-	@gcc $(CFLAGS) -c $< -o $@ -Imandatory 
+	gcc $(CFLAGS) -c $< -o $@ -Imandatory -Ibonus -Ilibft
 
 bonus: $(BONUS_OBJS)
 	@if [ -f $(BONUS_LINKED_FLAG) ]; then \
@@ -24,11 +24,13 @@ bonus: $(BONUS_OBJS)
 	else \
 		rm -f $(NAME) $(OBJS); \
 	    ar rcs $(NAME) $^; \
-	    ranlib $(NAME); \
+		ranlib $(NAME); \
 	    touch $(BONUS_LINKED_FLAG); \
 		echo "\033[0;31m:::::BONUS:::::\033[0m"; \
 		ar -t $(NAME); \
 	fi
+
+rebo: fclean bonus
 
 clean:
 	@rm -f $(OBJS) $(BONUS_OBJS) $(BONUS_LINKED_FLAG)

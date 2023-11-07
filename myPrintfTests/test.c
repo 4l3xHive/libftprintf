@@ -1,5 +1,10 @@
 #include <stdio.h>
 #include "ft_b_printf.h"
+#include <limits.h>
+#include <string.h>
+
+
+
 int main()
 {
 
@@ -9,9 +14,27 @@ int main()
 
 	//printf("--> %d", ft_printf("%01d|%-", 0, 0));
 
+	// NBR 0 TESTS 
+	
+	printf("return --> %d", ft_printf("%d", INT_MIN));
+	printf("\n\n\nnew\n\n\n");
+	printf("return --> %d", printf("%d", INT_MAX));
+	  
+	  printf("\n\n\n minus \n\n\n");
+	  printf("return --> %d", ft_printf("%d", 200));
+        printf("\n\n\nnew\n\n\n");
+        printf("return --> %d", printf("%d", 200));
+
+
+
+
+	
+
+
+
 
 	// STRING TEST INT MAX WIDTH !!!
-	printf("return --> %d", ft_printf("%20.2000000000s", "hello"));
+	/*printf("return --> %d", ft_printf("%20.2000000000s", "hello"));
 	printf("\n\n\nnew\n\n\n");
 	printf("return --> %d", printf("%20.20000000000s", "hello"));
 	  
@@ -19,7 +42,7 @@ int main()
 	  printf("return --> %d", ft_printf("%-20.2000000000s", "hello"));
         printf("\n\n\nnew\n\n\n");
         printf("return --> %d", printf("%-20.20000000000s", "hello"));
-	
+	*/
 	//	printf("--> %d", printf("%214748049d",  211111111));
 
 

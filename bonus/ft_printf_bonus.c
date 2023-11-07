@@ -14,12 +14,12 @@
 #include <stdio.h>
 int		g_flags;
 
-static int	ft_isdigit(int c)
+/*static int	ft_isdigit(int c)
 {
 	if (c >= '0' && c <= '9')
 		return (1);
 	return (0);
-}
+}*/
 
 static int	checkWidth(const char ***s, long **width, int prec_flag)
 {
