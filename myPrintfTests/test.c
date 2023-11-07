@@ -16,15 +16,58 @@ int main()
 
 	// NBR 0 TESTS 
 	
-	printf("return --> %d", ft_printf("%d", INT_MIN));
-	printf("\n\n\nnew\n\n\n");
-	printf("return --> %d", printf("%d", INT_MAX));
+
+
+
+
+	//printf("%010d")
+
+	/*printf("return --> %d", ft_printf("%-10.5d", 10));
+	printf("\nnew\n");
+	printf("return --> %d", printf("%-10.5d", 10));
+
+
+			printf("\n\nnew test\n\n");
+
+
+	printf("return --> %d", ft_printf("%-40.1d", -10));
+	printf("\nnew\n");
+	printf("return --> %d", printf("%-40d", -10));
+
+
+			printf("\n\nnew test\n\n");
+
+
+	printf("return --> %d", ft_printf("%-1000.2d", 300));
+	printf("\nnew\n");
+	printf("return --> %d", printf("%-1000.2d", 300));
+
+
+			printf("\n\nnew test\n\n");
+
+
+	printf("return --> %d", ft_printf("%-104.5d", 10));
+	printf("\nnew\n");
+	printf("return --> %d", printf("%-104.5d", 10));
+
+		printf("\n\nnew test\n\n");
+
+	printf("return --> %d", ft_printf("%-20000000000.5d", 10));
+	printf("\nnew\n");
+	printf("return --> %d", printf("%-2000000000000.5d", 10));
+	*/
 	  
-	  printf("\n\n\n minus \n\n\n");
+	  
+	  
+	  
+	  
+	  
+	  
+	  /*printf("\n\n\n minus \n\n\n");
 	  printf("return --> %d", ft_printf("%d", 200));
         printf("\n\n\nnew\n\n\n");
         printf("return --> %d", printf("%d", 200));
-
+*/
 
 
 
@@ -92,3 +135,4 @@ int main()
 }
 //compile command
 //gcc -o test test.c -I../bonus -L.. -lftprintf
+//cc test.c -o test -I../bonus -I../libft -L.. -lftprintf

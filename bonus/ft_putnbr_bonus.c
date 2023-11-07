@@ -13,90 +13,137 @@
 #include "ft_b_printf.h"
 #include <stdio.h>
 
-/*static int	nbrLen(int nbr)
-{
-	int	len;
-
-	len = 0;
-	while (nbr)
-	{
-		nbr /= 10;
-		len++;
-	}
-	return (len);
-}
-
-static int handleMinus(int precision, int width, int nbr)
+static int handleMinus(int precision, int width, char *answ)
 {
     int     len;
-    char    *answ;
+    int     i;
+    int     total_len;
 
-    answ = ft_itoa(nbr);
-    len = 0;
-   if (FLAG_DOT & g_flags)
+    total_len = 0;
+    i = 0;
+    len = ft_strlen(answ);
+    if (answ[i] == '-')
     {
-        while (precision-- && nbr)
-	    {
-            total_len += ;
+        ft_b_putchar('-', 0);
+        i++;
+        len--;
+        width--;
+        total_len++;
+    }
+    if (FLAG_DOT & g_flags)
+    {
+        if (precision)
+        {
+            width -= precision;
+            if (precision > len)
+            {
+                precision -= len;
+                while (precision--)
+                    total_len += ft_b_putchar('0', 0);
+                ft_putstr_fd(&answ[i], 1);
+                total_len += ft_strlen(&answ[i]);
+            }
+            else
+            {
+                while ((precision-- || width--) && answ[i])
+                    total_len += ft_b_putchar(answ[i++], 0);
+            }
+        }
+        else
+        {
+            ft_putstr_fd(&answ[i], 1);
+            total_len += ft_strlen(&answ[i]);
+        }
+        while (width-- > 0)
+            total_len += ft_b_putchar(' ', 0);
+    }
+    else
+    {
+        ft_putstr_fd(&answ[i], 1);
+        total_len += ft_strlen(&answ[i]);
+        while (width--)
+            total_len += ft_b_putchar(' ', 0);
+    }
+    free(answ);
+    return (total_len - 1);
+}
+
+static int	handleNormal(int precision, int width, char *answ)
+{   
+    int     i;
+    int     len;
+    int     total_len;
+    char    pad;
+    int     minus;
+
+    total_len = 0;
+    len = ft_strlen(answ);
+    i = 0;
+    minus = 0;
+    if (answ[i] == '-')
+    {
+        minus = 1;
+        len--;
+        i++;
+    }
+    if (FLAG_DOT & g_flags)
+    {   
+       while (width > precision)
+        {
+            total_len += ft_b_putchar(' ', 0);
             width--;
+        }
+        if (minus)
+            total_len += ft_b_putchar('-', 0);
+        if (precision > len)
+        {
+            precision -= len;
+            while (precision--)
+                total_len += ft_b_putchar('0', 0);
+             ft_putstr_fd(&answ[i], 1);
+            total_len += ft_strlen(&answ[i]);
+        }
+        else
+        {
+            while (precision-- && answ[i])
+                total_len += ft_b_putchar(answ[i++], 0);
         }
     }
     else
-	{
-        while (*s)
-		{
-            total_len += write(1, s++, 1);
+    {
+        if (FLAG_ZERO & g_flags)
+            pad = '0';
+        else
+            pad = ' ';
+        if (minus && pad == '0')
+            total_len += ft_b_putchar('-', 0);
+        if (minus)
+            width -= len + 1;
+        else
+            width -= len;
+        while (width > 0)
+        {
+            total_len += ft_b_putchar(pad, 0);
             width--;
         }
-    }
-    while (width-- > 0)
-        total_len += write(1, " ", 1);
-    if (total_len > orgwidth)
-        return (total_len);
-    return (orgwidth);
-
-
-
-
+        if (minus && pad == ' ')
+            total_len += ft_b_putchar('-', 0);
+        ft_putstr_fd(&answ[i], 1);
+        total_len += ft_strlen(answ);
+    } 
+    free(answ);           
+    return (total_len);
 }
 
-static int	handleNormal(int precision, int width, int nbr)
-{   
+
+int ft_b_putnbr(int nbr, int precision, int width)
+{
+    char    *answ;
+
     answ = ft_itoa(nbr);
     if (!answ)
-        return (NULL);
-    write(1, answ, )
-}
-*/
-
-int ft_b_putnbr(int nbr, int *total_lenght, int precision, int width)
-{
-	//char	c;
-    char    *answ;
-    (void)precision;
-    (void)width;
-    if (nbr == -2147483648)
-	{
-		write(1, "-2147483648", 11);
-		*total_lenght += 11;
-        return 0;
-	}
-	/*(void)precision;
-	(void)width;
-    printf("numlen --> %d\n\n", nbrLen(nbr));
-     printf("numlen --> %d\n\n", nbrLen(nbr));
-      printf("numlen --> %d\n\n", nbrLen(nbr));*/
-  /*  if (g_flags & FLAG_MINUS)
-		return (handleMinus(precision, width, nbr));
-	else
-    {*/
-          answ = ft_itoa(nbr);
-    if (!answ)
         return (-1);
-     write(1, answ, ft_strlen(answ));
-    
-    return 0;
-		//return (handleZeroNormal(precision, width,  nbr));
-	
-
+    if (g_flags & FLAG_MINUS)
+		return (handleMinus(precision, width, answ));
+    return (handleNormal(precision, width,  answ));   
 }

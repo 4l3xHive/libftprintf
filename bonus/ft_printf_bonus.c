@@ -139,7 +139,7 @@ int ft_printf(const char *s, ...)
 			//printf("FLAGS --> %d, precision --> %d\n", g_flags , precision);
 			//printf("zero pad width --> %d, precision --> %d\n", width, precision);
 			if (*s == 'd' || *s == 'i')	
-				ft_b_putnbr(va_arg(argptr, int), &total_length, precision, (int)width);
+				total_length += ft_b_putnbr(va_arg(argptr, int), precision, (int)width);
 			else if (*s == 's')
 				total_length += ft_b_putstr(va_arg(argptr, char *), width, (int)precision);
 			else if (*s == 'c')
