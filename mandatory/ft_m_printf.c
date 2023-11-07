@@ -10,8 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "ft_m_printf.h"
 #include <stdio.h>
+#include <stdlib.h>
 
 int ft_printf(const char *s, ...)
 {

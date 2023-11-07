@@ -6,11 +6,11 @@
 /*   By: apyykone <apyykone@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/01 23:18:32 by apyykone          #+#    #+#             */
-/*   Updated: 2023/11/04 17:43:05 by apyykone         ###   ########.fr       */
+/*   Updated: 2023/11/07 13:19:52 by apyykone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "ft_m_printf.h"
 
 int     ft_m_putpointer(size_t ptr)
 {
@@ -26,7 +26,7 @@ int     ft_m_putpointer(size_t ptr)
 		#ifdef __linux__
 			return (ft_m_putstr("(nil)"));
 		#endif
-		ft_m_putchar('0');
+		string[i++] = '0';
 	}
 
 	while (ptr != 0)

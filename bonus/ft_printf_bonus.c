@@ -6,7 +6,7 @@
 /*   By: apyykone <apyykone@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/05 11:58:13 by apyykone          #+#    #+#             */
-/*   Updated: 2023/11/06 01:27:29 by apyykone         ###   ########.fr       */
+/*   Updated: 2023/11/07 15:45:43 by apyykone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,16 +21,25 @@ static int	ft_isdigit(int c)
 	return (0);
 }
 
-static void	checkWidth(const char ***s, int **width)
+static int	checkWidth(const char ***s, long **width, int prec_flag)
 {
 	while (ft_isdigit(***s))
 	{
 		**width = (**width * 10) + (***s - '0');
 		(**s)++;
+		if (**width > INT_MAX && !prec_flag)
+			return (-1);
+		if (**width > INT_MAX && prec_flag)
+		{
+			**width = 0;
+			//printf("precision heloooooo here --> %d\n\n", (int)**width);
+			return (0);
+		}
 	}
+	return (0);
 
 }
-static void check_flags_and_width(const char **s, int *width, int *precision)
+static int check_flags_and_width(const char **s, long *width, long *precision)
 {
 	while (**s == '-' || **s == '0' || **s == '.')
 	{
@@ -38,25 +47,70 @@ static void check_flags_and_width(const char **s, int *width, int *precision)
         {
 			g_flags |= FLAG_MINUS;
 			(*s)++;
+			if (**s == '0')
+				(*s)++;
 			if (ft_isdigit(**s))
-				checkWidth(&s, &width);
+				if (checkWidth(&s, &width, 0) == -1)
+					return (-1);
 			if (**s == '.')
 			{
 				g_flags |= FLAG_DOT;
 				(*s)++;
-				checkWidth(&s, &precision);
+				if (checkWidth(&s, &precision, 1) == -1)
+					return (-1);
 			}
 		}
 		else if (**s == '0')
-			g_flags |= FLAG_ZERO;
-        else if (**s == '.')
+		{
+			(*s)++;
+			if (**s == '-')
+			{
+				g_flags |= FLAG_MINUS;
+				(*s)++;
+			}
+			else
+				g_flags |= FLAG_ZERO;
+			if (ft_isdigit(**s))
+			{
+				if (checkWidth(&s, &width, 0) == -1)
+					return (-1);
+			}
+			if (**s == '.')
+			{
+				g_flags |= FLAG_DOT;
+				(*s)++;
+				if (checkWidth(&s, &precision, 1) == -1)
+					return (-1);
+			}
+		}
+		else if (**s == '.')
 		{
         	g_flags |= FLAG_DOT;
 			(*s)++;
-			checkWidth(&s, &precision);
+			if (checkWidth(&s, &precision, 1) == -1)
+				return (-1);
 		}
     }
-	checkWidth(&s, &width);
+	/*printf("here string  --> %c", **s);
+	(*s)++;
+	printf("next --> %c\n\n", **s);
+		(*s)++;
+	printf("next --> %c\n\n", **s);
+	*/if (ft_isdigit(**s))
+	{
+		if (checkWidth(&s, &width, 0) == -1)
+			return (-1);
+		
+	}
+	//printf("here string --> %c\n\n precision --> %d", **s, (int)precision);
+	if (**s == '.')
+	{
+		(*s)++;
+		g_flags |= FLAG_DOT;
+		if (checkWidth(&s, &precision, 1) == -1)
+			return (-1);
+	}
+	return (0);
 }
 
 
@@ -64,8 +118,8 @@ int ft_printf(const char *s, ...)
 {
 	va_list argptr;
 	int		total_length;
-    int		width;
-	int		precision;
+    long	width;
+	long	precision;
 
 	precision = 0;
 	width = 0;
@@ -78,12 +132,16 @@ int ft_printf(const char *s, ...)
 		if (*s == '%')
 		{
 			s++;
-			check_flags_and_width(&s, &width, &precision);
-		//	printf("width --> %d, precision --> %d\n", width, precision);
+			if (check_flags_and_width(&s, &width, &precision) == -1)
+				return (-1);
+			//printf("width --> %d, precision --> %d current --> %c\n", (int)width, (int)precision, *s);
+			//printf("zero pad width --> %d, precision --> %d\n", width, precision); 
+			//printf("FLAGS --> %d, precision --> %d\n", g_flags , precision);
+			//printf("zero pad width --> %d, precision --> %d\n", width, precision);
 			if (*s == 'd' || *s == 'i')	
-				ft_b_putnbr(va_arg(argptr, int), &total_length, precision);
+				ft_b_putnbr(va_arg(argptr, int), &total_length, precision, (int)width);
 			else if (*s == 's')
-				total_length += ft_b_putstr(va_arg(argptr, char *), width, precision);
+				total_length += ft_b_putstr(va_arg(argptr, char *), width, (int)precision);
 			else if (*s == 'c')
 				total_length += ft_b_putchar(va_arg(argptr, int), width);
 			else if (*s == 'x' || *s == 'X')

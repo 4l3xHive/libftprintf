@@ -6,45 +6,34 @@
 /*   By: apyykone <apyykone@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/01 16:46:46 by apyykone          #+#    #+#             */
-/*   Updated: 2023/11/03 16:19:10 by apyykone         ###   ########.fr       */
+/*   Updated: 2023/11/07 14:50:04 by apyykone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_b_printf.h"
 
+/*static int	nbrLen(int nbr)
+{
+	int	len;
 
-/*static int ft_putsMinus(char *s, int width, int precision, int flags) {
-    int total_len;
-    int orgwidth;
-
-	total_len = 0;
-	orgwidth = width;
-    if (s == NULL)
-		s = "(null)";
-    if (FLAG_DOT & flags)
-    {
-        while (precision-- && *s)
-	    {
-            total_len += write(1, s++, 1);
-            width--;
-        }
-    }
-    else
+	len = 0;
+	while (nbr)
 	{
-        while (*s)
-		{
-            total_len += write(1, s++, 1);
-            width--;
-        }
-    }
-    while (width-- > 0)
-        total_len += write(1, " ", 1);
-    if (total_len > orgwidth)
-        return (total_len);
-    return (orgwidth);
+		nbr /= 10;
+		len++;
+	}
+	return (len);
 }
 
-static int	ft_putsNormal(char *s, int width, int precision, int flags)
+static int handleMinus(int precision, int width, int nbr)
+{
+    int total_len;
+
+	w
+
+}
+
+static int	handleNormal(int precision, int width, int nbr)
 {    
 	int total_len;
     int orgwidth;
@@ -70,15 +59,19 @@ static int	ft_putsNormal(char *s, int width, int precision, int flags)
         return (total_len);
     return (orgwidth);
 }
+
 */
-
-
-void	ft_b_putnbr(int nbr, int *total_lenght, int precision)
+void	ft_b_putnbr(int nbr, int *total_lenght, int precision, int width)
 {
 	char	c;
-    //checkFlags(nbr, precision);
-    (void)precision;
-    if (nbr == -2147483648)
+	(void)precision;
+	(void)width;
+/*	if (g_flags & FLAG_MINUS)
+		handleMinus(precision, width, nbr);
+	else
+		handleZeroNormal(precision, width,  nbr);
+	*/
+	if (nbr == -2147483648)
 	{
 		write(1, "-2147483648", 11);
 		*total_lenght += 11;
@@ -87,13 +80,13 @@ void	ft_b_putnbr(int nbr, int *total_lenght, int precision)
     if (nbr < 0)
     {
         write(1, "-", 1);
-        ft_b_putnbr(-nbr, total_lenght, 0);
+        ft_b_putnbr(-nbr, total_lenght, 0, 0);
         *total_lenght += 1;
     }
     else if (nbr > 9)
     {
-        ft_b_putnbr(nbr / 10, total_lenght, 0);
-        ft_b_putnbr(nbr % 10, total_lenght, 0);
+        ft_b_putnbr(nbr / 10, total_lenght, 0, 0);
+        ft_b_putnbr(nbr % 10, total_lenght, 0, 0);
     }
     else
     {

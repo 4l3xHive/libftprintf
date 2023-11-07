@@ -6,7 +6,7 @@
 /*   By: apyykone <apyykone@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/01 16:11:41 by apyykone          #+#    #+#             */
-/*   Updated: 2023/11/06 01:17:32 by apyykone         ###   ########.fr       */
+/*   Updated: 2023/11/07 16:10:12 by apyykone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,15 @@ static int ft_putsMinus(char *s, int width, int precision) {
         return (total_len);
     return (orgwidth);
 }
+static int  ft_len(char *s)
+{
+    int len;
 
+    len = 0;
+    while (s[len])
+        len++;
+    return (len);
+}
 static int	ft_putsNormal(char *s, int width, int precision)
 {    
 	int total_len;
@@ -53,7 +61,7 @@ static int	ft_putsNormal(char *s, int width, int precision)
 	total_len = 0;
     if (s == NULL)
         s = "(null)";
-    while (width-- > 0)
+    while (width-- > ft_len(s))
         total_len += write(1, " ", 1);
     if (FLAG_DOT & g_flags)
 	{
@@ -65,7 +73,6 @@ static int	ft_putsNormal(char *s, int width, int precision)
         while (*s) 
             total_len += write(1, s++, 1);
     }
-
     if (total_len > orgwidth)
         return (total_len);
     return (orgwidth);

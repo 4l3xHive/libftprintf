@@ -6,11 +6,11 @@
 /*   By: apyykone <apyykone@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/01 16:46:46 by apyykone          #+#    #+#             */
-/*   Updated: 2023/11/03 16:19:10 by apyykone         ###   ########.fr       */
+/*   Updated: 2023/11/07 13:20:06 by apyykone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "ft_m_printf.h"
 
 void	ft_m_putnbr(int nbr, int *total_lenght)
 {
