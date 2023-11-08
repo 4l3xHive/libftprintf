@@ -13,6 +13,26 @@
 #include "ft_b_printf.h"
 #include <stdio.h>
 
+int handleNegPad(int width, int len, char *answ)
+{
+    int total_len;
+
+    total_len = 0;
+    while (width-- > 0)
+        total_len += ft_b_putchar(' ', 0);
+    if (answ[0] == '-')
+    {
+        while (len > 1 && answ[0] == '-')
+        {
+            len--;
+            total_len += ft_b_putchar(' ', 0);
+        }
+    }
+    return (total_len);
+}
+
+
+
 static int handleMinus(int precision, int width, char *answ)
 {
     int     len;
@@ -54,18 +74,28 @@ static int handleMinus(int precision, int width, char *answ)
             ft_putstr_fd(&answ[i], 1);
             total_len += ft_strlen(&answ[i]);
         }
-        while (width-- > 0)
+        while (--width > 0)
             total_len += ft_b_putchar(' ', 0);
     }
     else
     {
         ft_putstr_fd(&answ[i], 1);
         total_len += ft_strlen(&answ[i]);
-        while (width--)
+        width -= total_len;
+        total_len += handleNegPad(width, len, answ);
+        while (width-- > 0)
             total_len += ft_b_putchar(' ', 0);
+        if (answ[0] == '-')
+        {
+            while (len > 1 && answ[0] == '-')
+            {
+                len--;
+                total_len += ft_b_putchar(' ', 0);
+            }
+        }
     }
     free(answ);
-    return (total_len - 1);
+    return (total_len);
 }
 
 static int	handleNormal(int precision, int width, char *answ)

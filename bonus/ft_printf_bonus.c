@@ -37,14 +37,13 @@ static int	checkWidth(const char ***s, long **width, int prec_flag)
 		}
 	}
 	return (0);
-
 }
-static int check_flags_and_width(const char **s, long *width, long *precision)
+static int	check_flags_and_width(const char **s, long *width, long *precision)
 {
 	while (**s == '-' || **s == '0' || **s == '.')
 	{
-        if (**s == '-')
-        {
+		if (**s == '-')
+		{
 			g_flags |= FLAG_MINUS;
 			(*s)++;
 			if (**s == '0')
@@ -85,24 +84,17 @@ static int check_flags_and_width(const char **s, long *width, long *precision)
 		}
 		else if (**s == '.')
 		{
-        	g_flags |= FLAG_DOT;
+			g_flags |= FLAG_DOT;
 			(*s)++;
 			if (checkWidth(&s, &precision, 1) == -1)
 				return (-1);
 		}
-    }
-	/*printf("here string  --> %c", **s);
-	(*s)++;
-	printf("next --> %c\n\n", **s);
-		(*s)++;
-	printf("next --> %c\n\n", **s);
-	*/if (ft_isdigit(**s))
+	}
+	if (ft_isdigit(**s))
 	{
 		if (checkWidth(&s, &width, 0) == -1)
-			return (-1);
-		
+			return (-1);	
 	}
-	//printf("here string --> %c\n\n precision --> %d", **s, (int)precision);
 	if (**s == '.')
 	{
 		(*s)++;
@@ -113,20 +105,18 @@ static int check_flags_and_width(const char **s, long *width, long *precision)
 	return (0);
 }
 
-
-int ft_printf(const char *s, ...)
+int	ft_printf(const char *s, ...)
 {
-	va_list argptr;
-	int		total_length;
-    long	width;
-	long	precision;
+	va_list		argptr;
+	int			total_length;
+	long		width;
+	long		precision;
 
 	precision = 0;
 	width = 0;
 	g_flags = 0;
 	va_start(argptr, s);
 	total_length = 0;
-
 	while (*s)
 	{	
 		if (*s == '%')
@@ -134,10 +124,6 @@ int ft_printf(const char *s, ...)
 			s++;
 			if (check_flags_and_width(&s, &width, &precision) == -1)
 				return (-1);
-			//printf("width --> %d, precision --> %d current --> %c\n", (int)width, (int)precision, *s);
-			//printf("zero pad width --> %d, precision --> %d\n", width, precision); 
-			//printf("FLAGS --> %d, precision --> %d\n", g_flags , precision);
-			//printf("zero pad width --> %d, precision --> %d\n", width, precision);
 			if (*s == 'd' || *s == 'i')	
 				total_length += ft_b_putnbr(va_arg(argptr, int), precision, (int)width);
 			else if (*s == 's')
@@ -152,17 +138,14 @@ int ft_printf(const char *s, ...)
 				total_length += ft_b_putpointer(va_arg(argptr, size_t));
 			else if (*s == 'u')
 				ft_b_put_uint(va_arg(argptr, unsigned int), &total_length);
-			
-			//printf("len --> %d\n", total_length);
 			s++;
 			g_flags = 0;
 			width = 0;
-		    precision = 0;
+			precision = 0;
 		}
 		else
 			total_length += ft_b_putchar(*s++, 0);
 	}
-	
 	va_end(argptr);
 	return (total_length);
 }

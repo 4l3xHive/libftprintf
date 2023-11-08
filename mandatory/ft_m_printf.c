@@ -11,19 +11,16 @@
 /* ************************************************************************** */
 
 #include "ft_m_printf.h"
-#include <stdio.h>
-#include <stdlib.h>
 
-int ft_printf(const char *s, ...)
+int	ft_printf(const char *s, ...)
 {
-	va_list argptr;
-	int		total_length;
+	va_list		argptr;
+	int			total_length;
 
 	va_start(argptr, s);
 	total_length = 0;
-
 	while (*s)
-	{	
+	{
 		if (*s == '%')
 		{
 			s++;
@@ -46,7 +43,6 @@ int ft_printf(const char *s, ...)
 		else
 			total_length += ft_m_putchar(*s++);
 	}
-	
 	va_end(argptr);
 	return (total_length);
 }

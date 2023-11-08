@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include "ft_b_printf.h" // Replace with the actual header for your ft_printf function
+#include "ft_m_printf.h" // Replace with the actual header for your ft_printf function
 #include <limits.h>
 int main() {
     // Test 30 to 58: Various format strings with %d and different numbers
@@ -8,13 +8,14 @@ int main() {
 
      printf("\n\nnew test\n\n");
 
-    printf("len --> %d",printf("Standard printf: %-2d", -1)); // Test 31
-    printf("len --> %d",ft_printf("Custom ft_printf: %-2d", -1));
+    printf("len --> %d",printf("orKEKE%d", INT_MIN - 1)); // Test 31
+    printf("len --> %d",ft_printf("myKEKE%d", INT_MIN- 1));
 
      printf("\n\nnew test\n\n");
 
-    printf("len --> %d",printf("Standard printf: %-3d", 1)); // Test 32
-    printf("len --> %d",ft_printf("Custom ft_printf: %-3d", 1));
+
+    /*printf("len --> %d",   printf("orLEN%-3d", 1)); // Test 32
+    printf("len --> %d",ft_printf("myLEN%-3d", 1));
 
      printf("\n\nnew test\n\n");
 
@@ -23,18 +24,18 @@ int main() {
 
      printf("\n\nnew test\n\n");
 
-    printf("len --> %d",printf("Standard printf: %-5d", 10)); // Test 34
-    printf("len --> %d",ft_printf("Custom ft_printf: %-5d", 10));
+    printf("len --> %d",printf(" ORG %-5d", 10)); // Test 34
+    printf("len --> %d",ft_printf(" MYY %-5d", 10));
 
      printf("\n\nnew test\n\n");
 
-    printf("len --> %d",printf("Standard printf: %d", 11)); // Test 35
-    printf("len --> %d",ft_printf("Custom ft_printf: %d", 11));
+    printf("len --> %d",printf("o%-2d", 11)); // Test 35
+    printf("len --> %d",ft_printf("m%-2d", 11));
 
      printf("\n\nnew test\n\n");
 
-    printf("len --> %d",printf("Standard printf: %d", 15)); // Test 36
-    printf("len --> %d",ft_printf("Custom ft_printf: %d", 15));
+    printf("len --> %d",printf("o%-3d", 15)); // Test 36
+    printf("len --> %d",ft_printf("m%-3d", 15));
 
 
      printf("\n\nnew test\n\n");
@@ -45,18 +46,18 @@ int main() {
      printf("\n\nnew test\n\n");
 
 
-    printf("len --> %d",printf("Standard printf: %d", 17)); // Test 38
-    printf("len --> %d",ft_printf("Custom ft_printf: %d", 17));
+   // printf("len --> %d",printf("Standard printf: %d", 17)); // Test 38
+   // printf("len --> %d",ft_printf("Custom ft_printf: %d", 17));
 
      printf("\n\nnew test\n\n");
 
-    printf("len --> %d",printf("Standard printf: %d", 99)); // Test 39
-    printf("len --> %d",ft_printf("Custom ft_printf: %d", 99));
+    printf("len --> %d",printf("OR%-5d", 99)); // Test 39
+    printf("len --> %d",ft_printf("MY%-5d", 99));
 
      printf("\n\nnew test\n\n");
 
-    printf("len --> %d",printf("Standard printf: %d", 100)); // Test 40
-    printf("len --> %d",ft_printf("Custom ft_printf: %d", 100));
+    printf("len --> %d",printf("OR%-3d",100)); // Test 40
+    printf("len --> %d",ft_printf("MY%-3d",100));
 
      printf("\n\nnew test\n\n");
 
@@ -80,13 +81,13 @@ int main() {
 
      printf("\n\nnew test\n\n");
 
-    printf("len --> %d",printf("Standard printf: %d", -14)); // Test 45
-    printf("len --> %d",ft_printf("Custom ft_printf: %d", -14));
+    printf("len --> %d",printf("OO%-4d", -14)); // Test 45
+    printf("len --> %d",ft_printf("MM%-4d", -14));
 
      printf("\n\nnew test\n\n");
 
-   printf("len --> %d", printf("Standard printf: %d", -15)); // Test 46
-    printf("len --> %d",ft_printf("Custom ft_printf: %d", -15));
+   printf("len --> %d", printf("OOO%-5d", -15)); // Test 46
+    printf("len --> %d",ft_printf("MMM%-5d", -15));
 
      printf("\n\nnew test\n\n");
 
@@ -125,7 +126,7 @@ int main() {
     ft_printf("Custom ft_printf: %d", ULONG_MAX);
 
     printf("Standard printf: %d", 9223372036854775807LL); // Test 57
-    ft_printf("Custom ft_printf: %d", 9223372036854775807LL);
+    ft_printf("Custom ft_printf: %d", 9223372036854775807LL);*/
 
     return 0;
 }
