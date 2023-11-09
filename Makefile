@@ -34,8 +34,6 @@ bonus: $(BONUS_OBJS) $(LIBFT_OBJS)
 		ar -t $(NAME); \
 	fi
 
-rebo: fclean bonus
-
 clean:
 	@rm -f $(OBJS) $(BONUS_OBJS) $(BONUS_LINKED_FLAG) $(LIBFT_OBJS)
 
@@ -44,4 +42,6 @@ fclean: clean
 
 re: fclean $(NAME)
 
-.PHONY: bonus all clean fclean re
+rebo: fclean bonus
+
+.PHONY: bonus all clean fclean re rebo

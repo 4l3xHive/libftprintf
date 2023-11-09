@@ -14,14 +14,14 @@
 
 /*** Writes buffer backwards algorithm adds hexdigits
  *		in backward order to the buffer				  */
-int ft_b_writehex(char *hexbuff, int start)
+int	ft_b_writehex(char *hexbuff, int start)
 {
-    int len;
+	int		len;
 
-    len = 0;
-    while (start >= 0)
-        len += ft_b_putchar(hexbuff[start--],0 );
-    return (len);
+	len = 0;
+	while (start >= 0)
+		len += ft_b_putchar(hexbuff[start--], 0);
+	return (len);
 }
 
 int	ft_b_puthex(unsigned int dec, char c)
@@ -30,26 +30,24 @@ int	ft_b_puthex(unsigned int dec, char c)
 	int		temp;
 	int		i;
 
-	(void)c;
 	i = 0;
-
 	if (dec == 0)
 		hexbuff[i++] = '0';
 	while (dec != 0)
-    {
-        temp = dec % 16; 
-        if (temp < 10) 
-            temp = temp + '0'; 
-        else
-        {
-            if (c == 'x')
-                temp = temp + 87;
-            else if (c == 'X')
-                temp = temp + 55;
-        }
-        hexbuff[i++] = temp;
-        dec /= 16;
-    }
+	{
+		temp = dec % 16;
+		if (temp < 10)
+			temp = temp + '0';
+		else
+		{
+			if (c == 'x')
+				temp = temp + 87;
+			else if (c == 'X')
+				temp = temp + 55;
+		}
+		hexbuff[i++] = temp;
+		dec /= 16;
+	}
 	hexbuff[i] = '\0';
-    return (ft_b_writehex(hexbuff, i - 1));
+	return (ft_b_writehex(hexbuff, i - 1));
 }

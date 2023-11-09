@@ -12,9 +12,9 @@
 
 #include "ft_m_printf.h"
 
-void	ft_m_put_uint(unsigned int u, int *total_length)
+void	ft_m_put_uint(unsigned int u, int **total_length)
 {
 	if (u >= 10)
 		ft_m_put_uint(u / 10, total_length);
-	*total_length += ft_m_putchar(u % 10 + '0');
+	**total_length += ft_m_putchar(u % 10 + '0');
 }

@@ -12,7 +12,7 @@
 
 #include "ft_b_printf.h"
 
-int     ft_b_putpointer(size_t ptr)
+int	ft_b_putpointer(size_t ptr)
 {
 	char	string[1000];
 	int		i;
@@ -20,15 +20,8 @@ int     ft_b_putpointer(size_t ptr)
 
 	base_character = "0123456789abcdef";
 	i = 0;
-
 	if (ptr == 0)
-	{
-		#ifdef __linux__
-			return (ft_b_putstr("(nil)", 0, 0));
-		#endif
 		ft_b_putchar('0', 0);
-	}
-
 	while (ptr != 0)
 	{
 		string[i] = base_character[ptr % 16];
@@ -37,5 +30,5 @@ int     ft_b_putpointer(size_t ptr)
 	}
 	string[i++] = 'x';
 	string[i] = '0';
-    return (ft_b_writehex(string, i));
+	return (ft_b_writehex(string, i));
 }

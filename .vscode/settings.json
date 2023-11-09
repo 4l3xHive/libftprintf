@@ -1,6 +1,7 @@
 {
     "files.associations": {
         "ft_printf.h": "c",
-        "ft_m_printf.h": "c"
+        "ft_m_printf.h": "c",
+        "ft_b_printf.h": "c"
     }
 }

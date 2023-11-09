@@ -6,7 +6,7 @@
 /*   By: apyykone <apyykone@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/01 16:44:15 by apyykone          #+#    #+#             */
-/*   Updated: 2023/11/05 18:43:10 by apyykone         ###   ########.fr       */
+/*   Updated: 2023/11/09 13:58:32 by apyykone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,4 +38,3 @@ int	ft_b_putchar(int c, int width)
 	}
 	return (total_len);
 }
-

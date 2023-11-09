@@ -14,14 +14,8 @@
 #include <stdio.h>
 int		g_flags;
 
-/*static int	ft_isdigit(int c)
-{
-	if (c >= '0' && c <= '9')
-		return (1);
-	return (0);
-}*/
-
-static int	checkWidth(const char ***s, long **width, int prec_flag)
+/* Handles "-." flags for %c & %s Others almost */
+static int	check_width(const char ***s, long **width, int prec_flag)
 {
 	while (ft_isdigit(***s))
 	{
@@ -32,7 +26,6 @@ static int	checkWidth(const char ***s, long **width, int prec_flag)
 		if (**width > INT_MAX && prec_flag)
 		{
 			**width = 0;
-			//printf("precision heloooooo here --> %d\n\n", (int)**width);
 			return (0);
 		}
 	}
@@ -49,13 +42,13 @@ static int	check_flags_and_width(const char **s, long *width, long *precision)
 			if (**s == '0')
 				(*s)++;
 			if (ft_isdigit(**s))
-				if (checkWidth(&s, &width, 0) == -1)
+				if (check_width(&s, &width, 0) == -1)
 					return (-1);
 			if (**s == '.')
 			{
 				g_flags |= FLAG_DOT;
 				(*s)++;
-				if (checkWidth(&s, &precision, 1) == -1)
+				if (check_width(&s, &precision, 1) == -1)
 					return (-1);
 			}
 		}
@@ -71,14 +64,14 @@ static int	check_flags_and_width(const char **s, long *width, long *precision)
 				g_flags |= FLAG_ZERO;
 			if (ft_isdigit(**s))
 			{
-				if (checkWidth(&s, &width, 0) == -1)
+				if (check_width(&s, &width, 0) == -1)
 					return (-1);
 			}
 			if (**s == '.')
 			{
 				g_flags |= FLAG_DOT;
 				(*s)++;
-				if (checkWidth(&s, &precision, 1) == -1)
+				if (check_width(&s, &precision, 1) == -1)
 					return (-1);
 			}
 		}
@@ -86,20 +79,20 @@ static int	check_flags_and_width(const char **s, long *width, long *precision)
 		{
 			g_flags |= FLAG_DOT;
 			(*s)++;
-			if (checkWidth(&s, &precision, 1) == -1)
+			if (check_width(&s, &precision, 1) == -1)
 				return (-1);
 		}
 	}
 	if (ft_isdigit(**s))
 	{
-		if (checkWidth(&s, &width, 0) == -1)
+		if (check_width(&s, &width, 0) == -1)
 			return (-1);	
 	}
 	if (**s == '.')
 	{
 		(*s)++;
 		g_flags |= FLAG_DOT;
-		if (checkWidth(&s, &precision, 1) == -1)
+		if (check_width(&s, &precision, 1) == -1)
 			return (-1);
 	}
 	return (0);
@@ -118,7 +111,7 @@ int	ft_printf(const char *s, ...)
 	va_start(argptr, s);
 	total_length = 0;
 	while (*s)
-	{	
+	{
 		if (*s == '%')
 		{
 			s++;
