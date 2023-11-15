@@ -6,7 +6,7 @@
 /*   By: apyykone <apyykone@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/01 16:46:46 by apyykone          #+#    #+#             */
-/*   Updated: 2023/11/09 15:52:04 by apyykone         ###   ########.fr       */
+/*   Updated: 2023/11/07 16:29:59 by apyykone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,20 +15,15 @@
 int handle_neg_pad(int width, int len, char *answ)
 {
     int total_len;
-
     total_len = 0;
+    (void)answ;
+    (void)len;
     while (width-- > 0)
         total_len += ft_b_putchar(' ', 0);
-    if (answ[0] == '-')
-    {
-        while (len > 1 && answ[0] == '-')
-        {
-            len--;
-            total_len += ft_b_putchar(' ', 0);
-        }
-    }
     return (total_len);
 }
+
+
 
 static int  handle_minus(int precision, int width, char *answ)
 {
@@ -52,7 +47,7 @@ static int  handle_minus(int precision, int width, char *answ)
         if (precision)
         {
             width -= precision;
-            if (precision > len)
+            if (precision > len - 1)
             {
                 precision -= len;
                 while (precision--)
@@ -63,7 +58,9 @@ static int  handle_minus(int precision, int width, char *answ)
             else
             {
                 while ((precision-- || width--) && answ[i])
-                    total_len += ft_b_putchar(answ[i++], 0);
+                {
+                       total_len += ft_b_putchar(answ[i++], 0);
+                }
             }
         }
         else
@@ -80,23 +77,13 @@ static int  handle_minus(int precision, int width, char *answ)
         total_len += ft_strlen(&answ[i]);
         width -= total_len;
         total_len += handle_neg_pad(width, len, answ);
-        while (width-- > 0)
-            total_len += ft_b_putchar(' ', 0);
-        if (answ[0] == '-')
-        {
-            while (len > 1 && answ[0] == '-')
-            {
-                len--;
-                total_len += ft_b_putchar(' ', 0);
-            }
-        }
     }
     free(answ);
     return (total_len);
 }
 
 static int	handleNormal(int precision, int width, char *answ)
-{   
+{
     int     i;
     int     len;
     int     total_len;
@@ -114,7 +101,7 @@ static int	handleNormal(int precision, int width, char *answ)
         i++;
     }
     if (FLAG_DOT & g_flags)
-    {   
+    {
        while (width > precision)
         {
             total_len += ft_b_putchar(' ', 0);
@@ -122,10 +109,10 @@ static int	handleNormal(int precision, int width, char *answ)
         }
         if (minus)
             total_len += ft_b_putchar('-', 0);
-        if (precision > len)
+        if (precision >= len - 1)
         {
             precision -= len;
-            while (precision--)
+            while (precision-- > 0)
                 total_len += ft_b_putchar('0', 0);
              ft_putstr_fd(&answ[i], 1);
             total_len += ft_strlen(&answ[i]);
@@ -157,8 +144,8 @@ static int	handleNormal(int precision, int width, char *answ)
             total_len += ft_b_putchar('-', 0);
         ft_putstr_fd(&answ[i], 1);
         total_len += ft_strlen(answ);
-    } 
-    free(answ);           
+    }
+    free(answ);
     return (total_len);
 }
 
@@ -172,5 +159,5 @@ int ft_b_putnbr(int nbr, int precision, int width)
         return (-1);
     if (g_flags & FLAG_MINUS)
 		return (handle_minus(precision, width, answ));
-    return (handleNormal(precision, width,  answ));   
+    return (handleNormal(precision, width,  answ));
 }
