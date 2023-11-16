@@ -31,7 +31,6 @@ static int	check_formatter(const char *s, int *total_length, va_list *argptr)
 		*total_length += ft_m_putpointer(va_arg(*argptr, size_t));
 	else if (*s == 'u')
 		ft_m_put_uint(va_arg(*argptr, unsigned int), &total_length);
-	//printf("total len --> %d\n");
 	if (*total_length < old_len)
 		return (-1);
 	return (0);

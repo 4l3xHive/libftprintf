@@ -10,8 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_M_PRINTF_H
-# define FT_M_PRINTF_H
+#ifndef FT_PRINTF_H
+# define FT_PRINTF_H
 # define INT_MAX 2147483647
 # define INT_MIN -2147483648
 # include <stdarg.h>
@@ -21,7 +21,7 @@
 int		ft_printf(const char *s, ...);
 int		ft_m_putstr(char *s);
 int		ft_m_putchar(int c);
-void    ft_m_putnbr(int nbr, int **total_lenght);
+void	ft_m_putnbr(int nbr, int **total_lenght);
 int		ft_m_puthex(unsigned int dec, char c);
 int		ft_m_putpointer(size_t ptr);
 int		ft_m_writehex(char *hexbuff, int start);

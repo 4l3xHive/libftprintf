@@ -12,9 +12,9 @@
 
 #include "ft_printf.h"
 
-void ft_m_putnbr(int nbr, int **total_length)
+void    ft_m_putnbr(int nbr, int **total_length)
 {
-    char c;
+    char    c;
 
     c = '-';
     if (nbr == -2147483648)
