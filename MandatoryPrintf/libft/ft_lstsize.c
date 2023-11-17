@@ -1,19 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
+/*   ft_lstsize.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: apyykone <apyykone@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/25 22:01:47 by apyykone          #+#    #+#             */
-/*   Updated: 2023/11/01 11:08:12 by apyykone         ###   ########.fr       */
+/*   Created: 2023/10/25 23:02:46 by apyykone          #+#    #+#             */
+/*   Updated: 2023/10/25 23:06:16 by apyykone         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_putstr_fd(char *s, int fd)
+int	ft_lstsize(t_list *lst)
 {
-	if (s)
-		write(fd, s, ft_strlen(s));
+	t_list	*current;
+	int		nodes;
+
+	current = lst;
+	nodes = 0;
+	while (current)
+	{
+		nodes++;
+		current = current->next;
+	}
+	return (nodes);
 }
