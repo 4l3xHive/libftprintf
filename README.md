@@ -1,5 +1,7 @@
 
 
+## Did not finish the bonus part but its in a agood point if want to do it later !
+
 ## Remember to use Francinette for testing !
 
 
