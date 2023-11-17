@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_m_printf.h"
+#include "ft_printf.h"
 
 int	ft_m_putstr(char *s)
 {
@@ -18,13 +18,15 @@ int	ft_m_putstr(char *s)
 
 	if (s == NULL)
 	{
-		write(1, "(null)", 6);
+		if (write(1, "(null)", 6) < 0)
+			return (-1);
 		return (6);
 	}
 	size = 0;
 	while (*s)
 	{
-		write(1, s++, 1);
+		if (write(1, s++, 1) < 0)
+			return (-1);
 		size++;
 	}
 	return (size);

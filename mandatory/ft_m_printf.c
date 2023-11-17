@@ -10,12 +10,15 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_m_printf.h"
+#include "ft_printf.h"
 
-static void	check_formatter(const char *s, int *total_length, va_list *argptr)
+static int	check_formatter(const char *s, int *total_length, va_list *argptr)
 {
+	int	old_len;
+
+	old_len = *total_length;
 	if (*s == 'd' || *s == 'i')
-		ft_m_putnbr(va_arg(*argptr, int), &total_length);
+		*total_length += ft_m_putnbr(va_arg(*argptr, int));
 	else if (*s == 's')
 		*total_length += ft_m_putstr(va_arg(*argptr, char *));
 	else if (*s == 'c')
@@ -27,7 +30,10 @@ static void	check_formatter(const char *s, int *total_length, va_list *argptr)
 	else if (*s == 'p')
 		*total_length += ft_m_putpointer(va_arg(*argptr, size_t));
 	else if (*s == 'u')
-		ft_m_put_uint(va_arg(*argptr, unsigned int), &total_length);
+		*total_length += ft_m_put_uint(va_arg(*argptr, unsigned int));
+	if (*total_length < old_len)
+		return (-1);
+	return (0);
 }
 
 int	ft_printf(const char *s, ...)
@@ -42,11 +48,16 @@ int	ft_printf(const char *s, ...)
 		if (*s == '%')
 		{
 			s++;
-			check_formatter(s, &total_length, &argptr);
+			if (check_formatter(s, &total_length, &argptr) < 0)
+				return (-1);
 			s++;
 		}
 		else
-			total_length += ft_m_putchar(*s++);
+		{
+			if (ft_m_putchar(*s++) == -1)
+				return (-1);
+			total_length++;
+		}
 	}
 	va_end(argptr);
 	return (total_length);

@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_m_printf.h"
+#include "ft_printf.h"
 
 int	ft_m_putpointer(size_t ptr)
 {
@@ -30,5 +30,5 @@ int	ft_m_putpointer(size_t ptr)
 	}
 	string[i++] = 'x';
 	string[i] = '0';
-	return (ft_m_writehex(string, i));
+	return (ft_m_writeback(string, i, 0));
 }

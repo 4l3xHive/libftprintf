@@ -10,11 +10,26 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_m_printf.h"
+#include "ft_printf.h"
 
-void	ft_m_put_uint(unsigned int u, int **total_length)
+int	ft_m_put_uint(unsigned int dec)
 {
-	if (u >= 10)
-		ft_m_put_uint(u / 10, total_length);
-	**total_length += ft_m_putchar(u % 10 + '0');
+	char	numbuff[100];
+	int		temp;
+	int		i;
+	int		flag;
+
+	flag = 0;
+	i = 0;
+	if (dec == 0)
+		numbuff[i++] = '0';
+	while (dec != 0)
+	{
+		temp = dec % 10;
+		temp = temp + '0';
+		numbuff[i++] = temp;
+		dec /= 10;
+	}
+	numbuff[i] = '\0';
+	return (ft_m_writeback(numbuff, i - 1, flag));
 }
