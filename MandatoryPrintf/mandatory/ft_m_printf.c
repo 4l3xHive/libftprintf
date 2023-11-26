@@ -49,14 +49,16 @@ int	ft_printf(const char *s, ...)
 		{
 			s++;
 			if (check_formatter(s, &total_length, &argptr) < 0)
-				return (-1);
+				break ;
 			s++;
 		}
 		else
 		{
 			if (ft_m_putchar(*s++) == -1)
-				return (-1);
-			total_length++;
+			{
+				total_length = -1;
+				break ;
+			}
 		}
 	}
 	va_end(argptr);
