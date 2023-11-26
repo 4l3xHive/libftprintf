@@ -24,7 +24,7 @@ makelibft:
 $(NAME): makelibft $(OBJS)
 	@ar rcs $@ $(OBJS)
 	@echo "\033[0;32m::MANDATORY::\033[0m"
-	@ar -t $@
+
 clean:
 	@rm -f $(OBJS) $(LIBFT_OBJS)
 	@cd $(LIBFTDIR) && make clean
