@@ -25,12 +25,12 @@ static int	check_formatter(const char *s, int *total_length, va_list *argptr)
 		*total_length += ft_m_putchar(va_arg(*argptr, int));
 	else if (*s == 'x' || *s == 'X')
 		*total_length += ft_m_puthex(va_arg(*argptr, unsigned int), *s);
+	else if (*s == '%')
+		*total_length += ft_m_putchar('%');
 	else if (*s == 'p')
 		*total_length += ft_m_putpointer(va_arg(*argptr, size_t));
 	else if (*s == 'u')
 		*total_length += ft_m_put_uint(va_arg(*argptr, unsigned int));
-	else
-		*total_length += ft_m_putchar(*s);
 	if (*total_length < old_len)
 		return (-1);
 	return (0);
@@ -48,9 +48,8 @@ int	ft_printf(const char *s, ...)
 		if (*s == '%')
 		{
 			s++;
-			if (check_formatter(s, &total_length, &argptr) < 0)
+			if (check_formatter(s++, &total_length, &argptr) < 0)
 				break ;
-			s++;
 		}
 		else
 		{
@@ -59,6 +58,7 @@ int	ft_printf(const char *s, ...)
 				total_length = -1;
 				break ;
 			}
+			total_length++;
 		}
 	}
 	va_end(argptr);
