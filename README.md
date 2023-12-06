@@ -5,7 +5,7 @@
 ### C and S formatters work with flags only thing is that the null checks are not okay-
 ### and the functions are to long and norminette ofc.
 
-
+## Bonus folder not compiled not ready do it if motivation and time someday
 
 
 
