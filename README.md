@@ -1,5 +1,5 @@
 #FT_PRINTF 42-Cursus
-
+# Has both nested libft and printf USE THIS FOR THE PROJECTS AND REMOVE THE BONUS FOLDER
 ## Maybe will come later to finish the bonus part.
 ## Totally lost the motivation but.
 ### C and S formatters work with flags only thing is that the null checks are not okay-
