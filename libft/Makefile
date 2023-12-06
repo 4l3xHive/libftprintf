@@ -66,9 +66,9 @@ bonus: $(BONUS_OBJ)
 	@if [ -f $(BONUS_LINKED_FLAG) ]; then \
 		echo "make: Nothing to be done for bonus'."; \
 	else \
-	    @ar rus $(NAME) $^; \
-	    @ranlib $(NAME); \
-	    @touch $(BONUS_LINKED_FLAG); \
+	    ar rus $(NAME) $^; \
+	    ranlib $(NAME); \
+	    touch $(BONUS_LINKED_FLAG); \
 	fi
 
 clean:
