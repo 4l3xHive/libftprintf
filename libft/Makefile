@@ -57,11 +57,10 @@ BONUS_OBJ = $(addprefix $(OBJS_DIR), $(addsuffix .o, $(BONUS_FILES)))
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	ar rcs $@ $^ 
-	ranlib $(NAME)
+	@ar rcs $@ $^ 
 
 %.o: %.c
-	gcc $(CFLAGS) -c $< -o $@
+	@gcc $(CFLAGS) -c $< -o $@
 
 bonus: $(BONUS_OBJ)
 	@if [ -f $(BONUS_LINKED_FLAG) ]; then \
@@ -73,10 +72,10 @@ bonus: $(BONUS_OBJ)
 	fi
 
 clean:
-	rm -f $(OBJS) $(BONUS_OBJ) $(BONUS_LINKED_FLAG)
+	@rm -f $(OBJS) $(BONUS_OBJ) $(BONUS_LINKED_FLAG)
 
 fclean: clean
-	rm -f $(NAME)
+	@rm -f $(NAME)
 
 re: fclean $(NAME)
 
