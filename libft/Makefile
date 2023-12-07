@@ -1,5 +1,6 @@
 CFLAGS = -Wall -Wextra -Werror
 NAME = libft.a
+BONUS_LINKED_FLAG = .bonus_linked
 SRCS_FILES = ft_memset \
 		ft_bzero \
 		ft_memcpy \
@@ -55,17 +56,14 @@ BONUS_OBJ = $(addprefix $(OBJS_DIR), $(addsuffix .o, $(BONUS_FILES)))
 
 all: $(NAME)
 
-$(NAME): $(OBJS)
+$(NAME): $(OBJS) $(BONUS_OBJ)
 	@ar rcs $@ $^ 
 
 %.o: %.c
 	@gcc $(CFLAGS) -c $< -o $@
 
-bonus: $(BONUS_OBJ)
-	@ar rus $(NAME) $^
-
 clean:
-	@rm -f $(OBJS) $(BONUS_OBJ)
+	@rm -f $(OBJS) $(BONUS_OBJ) $(BONUS_LINKED_FLAG)
 
 fclean: clean
 	@rm -f $(NAME)
