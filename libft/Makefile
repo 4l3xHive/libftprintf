@@ -1,6 +1,5 @@
 CFLAGS = -Wall -Wextra -Werror
 NAME = libft.a
-BONUS_LINKED_FLAG = .bonus_linked
 SRCS_FILES = ft_memset \
 		ft_bzero \
 		ft_memcpy \
@@ -63,16 +62,10 @@ $(NAME): $(OBJS)
 	@gcc $(CFLAGS) -c $< -o $@
 
 bonus: $(BONUS_OBJ)
-	@if [ -f $(BONUS_LINKED_FLAG) ]; then \
-		echo "make: Nothing to be done for bonus'."; \
-	else \
-	    ar rus $(NAME) $^; \
-	    ranlib $(NAME); \
-	    touch $(BONUS_LINKED_FLAG); \
-	fi
+	@ar rus $(NAME) $^
 
 clean:
-	@rm -f $(OBJS) $(BONUS_OBJ) $(BONUS_LINKED_FLAG)
+	@rm -f $(OBJS) $(BONUS_OBJ)
 
 fclean: clean
 	@rm -f $(NAME)
