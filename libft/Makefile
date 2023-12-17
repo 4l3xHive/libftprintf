@@ -57,7 +57,8 @@ BONUS_OBJ = $(addprefix $(OBJS_DIR), $(addsuffix .o, $(BONUS_FILES)))
 all: $(NAME)
 
 $(NAME): $(OBJS) $(BONUS_OBJ)
-	@ar rcs $@ $^ 
+	@ar rcs $@ $^
+	@printf "\033[0;32mLibft archived!\n\e[0m"
 
 %.o: %.c
 	@gcc $(CFLAGS) -c $< -o $@
@@ -67,6 +68,7 @@ clean:
 
 fclean: clean
 	@rm -f $(NAME)
+	@printf "\033[0;31mLibft Cleaned!\n\e[0m"
 
 re: fclean $(NAME)
 

@@ -23,6 +23,7 @@ makelibft:
 
 $(NAME): makelibft $(OBJS)
 	@ar rcs $@ $(OBJS)
+	@printf "\033[0;32mPrintf archived!\n\e[0m"
 
 %.o: %.c
 	@$(CC) $(CFLAGS) -c $< -o $@
@@ -34,6 +35,7 @@ clean:
 fclean: clean
 	@rm -f $(NAME)
 	@cd $(LIBFTDIR) && make fclean
+	@printf "\033[0;31mPrintf Cleaned!\n\e[0m"
 
 re: fclean $(NAME)
 
