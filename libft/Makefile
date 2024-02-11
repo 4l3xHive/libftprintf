@@ -56,27 +56,19 @@ BONUS_OBJ = $(addprefix $(OBJS_DIR), $(addsuffix .o, $(BONUS_FILES)))
 
 all: $(NAME)
 
-$(NAME): $(OBJS)
-	ar rcs $@ $^ 
-	ranlib $(NAME)
+$(NAME): $(OBJS) $(BONUS_OBJ)
+	@ar rcs $@ $^
+	@printf "\033[0;32mLibft archived!\n\e[0m"
 
 %.o: %.c
-	gcc $(CFLAGS) -c $< -o $@
-
-bonus: $(BONUS_OBJ)
-	@if [ -f $(BONUS_LINKED_FLAG) ]; then \
-		echo "make: Nothing to be done for bonus'."; \
-	else \
-	    ar rus $(NAME) $^; \
-	    ranlib $(NAME); \
-	    touch $(BONUS_LINKED_FLAG); \
-	fi
+	@gcc $(CFLAGS) -c $< -o $@
 
 clean:
-	rm -f $(OBJS) $(BONUS_OBJ) $(BONUS_LINKED_FLAG)
+	@rm -f $(OBJS) $(BONUS_OBJ) $(BONUS_LINKED_FLAG)
 
 fclean: clean
-	rm -f $(NAME)
+	@rm -f $(NAME)
+	@printf "\033[0;31mLibft Cleaned!\n\e[0m"
 
 re: fclean $(NAME)
 
